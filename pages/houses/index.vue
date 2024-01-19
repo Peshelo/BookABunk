@@ -29,14 +29,14 @@
           <div>
        
     <!-- Slideover -->
-    <USlideover v-model="isOpen" :width="'xl'">
+    <USlideover v-model="isHouseOpen" :width="'xl'">
       <UCard class="flex flex-col flex-1 overflow-scroll" :ui="{body: { base: 'flex-1', xl: 'w-[800px]' }, ring: '', divide: 'divide-y divide-gray-800 dark:divide-gray-800' }">
         <template #header>
-          <Placeholder class="h-8" />
+          <!-- <Placeholder class="h-8" /> -->
           <h1 class="text-md text-bold">{{ currentHouse.address }}</h1>
         </template>
 
-        <Placeholder class="h-full" />
+        <!-- <Placeholder class="h-full" /> -->
         <!-- Images -->
         <div class="grid grid-cols-2 gap-2">
             <!-- <div class="grid grid-cols-1 gap-2">
@@ -53,23 +53,14 @@
             <h1 class="my-2 text-lg">{{ currentHouse.propertyType }}</h1>
             <p class="text-2xl text-gray-500">{{ currentHouse.address }}</p>
             <p class="text-2xl my-5"><b>${{ currentHouse.price }}</b> / Month</p>
-            <div class="grid grid-cols-4 divide-x gap-2 drop-shadow-xl border p-2 rounded-lg">
-              <div class="w-full flex flex-row text-2xl items-center gap-2">
-                <Icon name="material-symbols:kid-star-sharp" size="40px" class="text-[var(--primarydark)]"/>
-                <p class="text-xl text-gray-400">5.0</p>
-              </div>
-              <div class="w-full  flex flex-row text-2xl items-center gap-2">
-                <Icon name="material-symbols:kid-star-sharp" size="40px" class="text-[var(--primarydark)]"/>
-                <p class="text-xl text-gray-400">5.0</p>
-              </div>
-              <div class="w-full  flex flex-row text-2xl items-center gap-2">
-                <Icon name="material-symbols:kid-star-sharp" size="40px" class="text-[var(--primarydark)]"/>
-                <p class="text-xl text-gray-400">5.0</p>
-              </div>
-              <div class="w-full  flex flex-row text-2xl items-center gap-2">
-                <Icon name="material-symbols:kid-star-sharp" size="40px" class="text-[var(--primarydark)]"/>
-                <p class="text-xl text-gray-400">5.0</p>
-              </div>
+            <p>This house has: </p>
+            <div class="grid grid-cols-4 divide-x gap-2 shadow-xl hover:shadow-none duration-150 border p-2 rounded-lg">
+             <HousePropertyFeaturesCard :icon="'material-symbols:other-houses-outline'" :value="5" :type="'Rooms'"/>
+             <HousePropertyFeaturesCard :icon="'cil:bathroom'" :value="1" :type="'Bathrooms'"/>
+             <HousePropertyFeaturesCard :icon="'streamline:travel-wayfinder-toilet-sign-man-woman-toilet-sign-restroom-bathroom-user-human-person'" :value="10" :type="'Gender'"/>
+             <HousePropertyFeaturesCard :icon="'ion:male-outline'" :type="'Gender'"/>
+             <HousePropertyFeaturesCard :icon="'material-symbols:wifi-rounded'" :type="'Wifi'"/>
+             <HousePropertyFeaturesCard :icon="'material-symbols:water-drop-rounded'" :type="'Borehole'"/>
             </div>
         </div>
         <div>
@@ -77,7 +68,11 @@
         </div>
         <!-- Details -->
         <template #footer>
-          <Placeholder class="h-8" />
+          <!-- <Placeholder class="h-8" /> -->
+          <h2 class="text-md text-bold">Contact Details</h2>
+          <p class="text-md text-bold">Username: {{ currentHouse.propertyOwner.username}}</p>
+          <p class="text-md text-bold">Email: {{ currentHouse.propertyOwner.email}}</p>
+          <NuxtLink to="/tenants/" class="text-white w-full bg-[var(--secondary)] p-2 mt-4 rounded-lg">Check Other properties</NuxtLink>
         </template>
       </UCard>
     </USlideover>
@@ -90,7 +85,9 @@
 </template>
 
 <script setup>
-const isOpen = ref(false)
+const isHouseOpen = ref(false)
+const isFilterOpen = ref(false)
+const router = useRouter();
 const currentHouse = ref(null)
     const colorMode = useColorMode();
     const isDark = computed(() => {
@@ -104,10 +101,10 @@ const currentHouse = ref(null)
 
     const { data: properties,pending,error,refresh } = await useFetch('http://localhost:8080/api/properties?pageSize=10&pageNumber=0&offset=0')
     const selectHouse = (house) => {
-        isOpen.value = true
+        // isHouseOpen.value = true
         console.log(house)
         currentHouse.value = house
-        // router.push(`/houses/${house.id}`)
+        router.push(`/houses/${house.id}`)
     }
 </script>
 
