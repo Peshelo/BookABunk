@@ -1,0 +1,37 @@
+/* @font-face {
+    font-family: "DMSans_Regular";
+    src: local("DMSans"),     url(~assets/fonts/DMSans-Regular.ttf) format("truetype");
+}
+@font-face {
+    font-family: "DMSans_Medium";
+    src: local("DMSans"),     url(~assets/fonts/DMSans/DMSans-Medium.ttf) format("truetype");
+}
+@font-face {
+    font-family: "DMSans_Bold";
+    src: local("DMSans"),     url(~assets/fonts/DMSans/DMSans-Bold.ttf) format("truetype");
+} */
+:root {
+    --primary: #db3a34;
+    --secondary: #084c61;
+    --secondaryblue: #177e89;
+    --secondaryyellow: #ffc857;
+    --primarydark: #323031; 
+  }
+body{
+    font-family: Poppins;
+
+}
+
+html {
+    font-family: "DMSans_Regular";
+}
+.bbold{
+    font-family: "DMSans_Bold";
+}
+.mmedium{
+    font-family: "DMSans_Medium";
+}
+
+img{
+    object-fit: covers;
+}
